@@ -36,6 +36,11 @@ if (str == NULL)
 str = "(null)";
 princahr += write(1, str, strlen(str));
 }
+else if (*format == 'd' || *format == 'i')
+{
+int d = va_arg(list, int);
+princahr += print_int(d);
+}
 else
 {
 princahr += write(1, "%", 1);
@@ -48,4 +53,29 @@ format++;
 }
 va_end(list);
 return (princahr);
+}
+/**
+ * print_int - prints an integer
+ * @num: argument of type integer to print
+ *
+ * Return: the number of characters printed
+ */
+int print_int(int num)
+{
+char c;
+int count = 0;
+if (num < 0)
+{
+write(1, "-", 1);
+num = -num;
+count++;
+}
+if (num / 10)
+{
+count += print_int(num / 10);
+}
+c = num % 10 + '0';
+write(1, &c, 1);
+count++;
+return count;
 }

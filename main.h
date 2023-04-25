@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <unistd.h>
 int _printf(const char *format, ...);
+int print_int(int num);
 /**
  * _putchar - writes the character c to std
  * @c: parameter to compare
