@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _printf - Printf function
  * @format: format.
@@ -14,7 +15,7 @@ return (-1);
 va_start(list, format);
 for (i = 0; format && format[i] != '\0'; i++)
 if (format[i] != '%')
-princahr++;
+princahr += _putchar(format[i]);
 va_end(list);
 return (princahr);
 }

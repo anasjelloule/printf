@@ -11,4 +11,5 @@ int _printf(const char *format, ...);
  * Return: 1 or 0
  */
 int _putchar(char c);
+int _puts(char *s);
 #endif
