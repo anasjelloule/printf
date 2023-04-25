@@ -12,6 +12,8 @@ int _printf(const char *format, ...)
 va_list list;
 int princahr = 0;
 char *str, c;
+if (format == NULL)
+return (-1);
 va_start(list, format);
 while (*format)
 {
