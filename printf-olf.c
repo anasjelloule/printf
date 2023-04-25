@@ -1,0 +1,91 @@
+#include "main.h"
+#include <unistd.h>
+#include <string.h>
+/**
+ * print_string - prints an integer
+ * @str: argument of type integer to print
+ *
+ * Return: the number of characters printed
+ */
+int print_string(char *str)
+{
+if (str == NULL)
+str = "(null)";
+return (write(1, str, strlen(str)));
+}
+/**
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
+ */
+int _printf(const char *format, ...)
+
+{
+va_list list;
+int princahr = 0;
+char *str, c;
+if (format == NULL)
+return (-1);
+va_start(list, format);
+while (*format)
+{
+if (*format == '%')
+{
+format++;
+if (*format == '%')
+princahr += write(1, "%", 1);
+else if (*format == '\0')
+return (-1);
+else if (*format == 'c')
+{
+c = va_arg(list, int);
+princahr += write(1, &c, 1);
+}
+else if (*format == 's')
+{
+str = va_arg(list, char *);
+princahr += print_string(str);
+}
+else if (*format == 'd' || *format == 'i')
+{
+int d = va_arg(list, int);
+princahr += print_int(d);
+}
+else
+{
+princahr += write(1, "%", 1);
+princahr += write(1, format, 1);
+}
+}
+else
+princahr += write(1, format, 1);
+format++;
+}
+va_end(list);
+return (princahr);
+}
+/**
+ * print_int - prints an integer
+ * @num: argument of type integer to print
+ *
+ * Return: the number of characters printed
+ */
+int print_int(int num)
+{
+char c;
+int count = 0;
+if (num < 0)
+{
+write(1, "-", 1);
+num = -num;
+count++;
+}
+if (num / 10)
+{
+count += print_int(num / 10);
+}
+c = num % 10 + '0';
+write(1, &c, 1);
+count++;
+return (count);
+}
