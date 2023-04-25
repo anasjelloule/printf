@@ -1,5 +1,6 @@
 #include "main.h"
-
+#include <unistd.h>
+#include <string.h>
 /**
  * _printf - Printf function
  * @format: format.
@@ -8,11 +9,9 @@
 int _printf(const char *format, ...)
 
 {
-int princahr = 0;
 va_list list;
-char *s;
-if (format == NULL)
-return (-1);
+int princahr = 0;
+char *str, c;
 va_start(list, format);
 while (*format)
 {
@@ -20,15 +19,20 @@ if (*format == '%')
 {
 format++;
 if (*format == '%')
-princahr += _putchar('%');
+princahr += write(1, "%", 1);
+else if (*format == '\0')
+return (-1);
 else if (*format == 'c')
-princahr += _putchar(va_arg(list, int));
+{
+c = va_arg(list, int);
+princahr += write(1, &c, 1);
+}
 else if (*format == 's')
 {
-s = va_arg(list, char *);
-if (!s)
-s = "(null)";
-princahr += _puts(s);
+str = va_arg(list, char *);
+if (str == NULL)
+str = "(null)";
+princahr += write(1, str, strlen(str));
 }
 else
 {
@@ -37,7 +41,7 @@ princahr += write(1, format, 1);
 }
 }
 else
-princahr += _putchar(*format);
+princahr += write(1, format, 1);
 format++;
 }
 va_end(list);
