@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+int _putchar(char c);
+int _puts(char *s);
+
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
 
