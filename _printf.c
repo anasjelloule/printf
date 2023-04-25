@@ -2,6 +2,18 @@
 #include <unistd.h>
 #include <string.h>
 /**
+ * print_string - prints an integer
+ * @str: argument of type integer to print
+ *
+ * Return: the number of characters printed
+ */
+int print_string(char *str)
+{
+if (str == NULL)
+str = "(null)";
+return (write(1, str, strlen(str)));
+}
+/**
  * _printf - Printf function
  * @format: format.
  * Return: Printed chars.
@@ -32,9 +44,7 @@ princahr += write(1, &c, 1);
 else if (*format == 's')
 {
 str = va_arg(list, char *);
-if (str == NULL)
-str = "(null)";
-princahr += write(1, str, strlen(str));
+princahr += print_string(str);
 }
 else if (*format == 'd' || *format == 'i')
 {
@@ -77,5 +87,5 @@ count += print_int(num / 10);
 c = num % 10 + '0';
 write(1, &c, 1);
 count++;
-return count;
+return (count);
 }
