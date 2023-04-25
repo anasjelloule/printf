@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <unistd.h>
 int _printf(const char *format, ...);
 /**
  * _putchar - writes the character c to std
